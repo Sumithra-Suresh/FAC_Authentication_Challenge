@@ -88,6 +88,23 @@ function createSession(user_id) {
 
 </details>
 
+<details>
+<summary>Errors</summary>
+
+```js
+DATE('now', '+7days');
+
+error: 'NOT NULL constraint failed: sessions.expires_at'       
+code: 'SQLITE_CONSTRAINT_NOTNULL'
+```
+
+In DATE(timeString, modifiers), the modifier should have space between '+7' and 'days'.
+
+```js
+DATE('now', '+7 days');
+```
+</details>
+
 ## Challenge 2: sign up
 
 The app currently has no way to sign up for a new account. There is a sign up form at `GET /sign-up`, but you need to fill out the `POST /sign-up` handler to make this feature work.
@@ -122,6 +139,22 @@ function post(req, res) {
 }
 ```
 
+</details>
+
+<details>
+<summary>Errors</summary>
+
+```js
+error: 'COOKIE_SECRET' env variable is not visible        
+```
+
+In package.json, we need to set 
+
+```js
+SET DB_FILE=test.sqlite & SET COOKIE_SECRET=abc
+```
+
+This will happnen only in windows environment.
 </details>
 
 ## Challenge 3: log in
